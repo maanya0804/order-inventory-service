@@ -1,0 +1,45 @@
+### 1. Create a product
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "Organic Milk 1L",
+  "price": 68.00,
+  "stock": 10
+}
+
+### 2. List products
+GET http://localhost:8080/products
+
+### 3. Place an order (should return 201)
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "customerName": "Test Customer",
+  "items": [ { "productId": 1, "quantity": 2 } ]
+}
+
+### 4. Order too much (should return 409)
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "customerName": "Test Customer",
+  "items": [ { "productId": 1, "quantity": 999 } ]
+}
+
+### 5. Unknown product (should return 404)
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "customerName": "Test Customer",
+  "items": [ { "productId": 9999, "quantity": 1 } ]
+}
+
+### 6. List orders
+GET http://localhost:8080/orders
+
+### 7. Check product 1 stock
+GET http://localhost:8080/products/1
